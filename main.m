@@ -5,10 +5,11 @@
 % Modified:	November 2013
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% clear variables
+%% preparing for running
+% clear variables
 clear all; close all; clc;
 
-%% add to path
+% add to path
 this_dir = pwd;
 addpath(genpath(this_dir));
 

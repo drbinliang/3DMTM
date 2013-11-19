@@ -1,3 +1,10 @@
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bin Liang (bin.liang.ty@gmail.com)
+% Charles Sturt University test
+% Created:	September 2013
+% Modified:	November 2013
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Gesture recognition Version 1.0 19/11/2013
 
 Dataset: MSR Action3D dataset
