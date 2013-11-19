@@ -1,3 +1,10 @@
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bin Liang (bin.liang.ty@gmail.com)
+% Charles Sturt University
+% Created:	September 2013
+% Modified:	November 2013
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% clear variables
 clear all; close all; clc;
 
