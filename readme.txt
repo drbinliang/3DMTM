@@ -1,4 +1,5 @@
-Action recognition code
-performed on MSR Action3D dataset
+Gesture recognition Version 1.0 19/11/2013
 
-r2 test
+Dataset: MSR Action3D dataset
+This code is performed well on MSR Actino3D dataset and a paper has been 
+accepted by ICCV workshop.
