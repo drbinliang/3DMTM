@@ -5,7 +5,7 @@
 % Modified:	November 2013
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Preparing for running
+%% preparing for running
 % clear variables
 clear all; close all; clc;
 
@@ -16,34 +16,61 @@ addpath(genpath(this_dir));
 % set dataset path
 data_path = 'D:\\Research\\Projects\\Dataset\\MSR Action3D\\dataset\\';
 
-% specify the paths to training and  test data
-test_subsets = {'test_one\\', 'test_two\\', 'cross_subject_test\\'};
-action_subsets = {'AS1\\', 'AS2\\', 'AS3\\'};
+training_subsets = ['test']
 
-training_data_dir = [data_path test_subsets{2} 'training\\' action_subsets{3}];
-test_data_dir = [data_path test_subsets{2} 'test\\' action_subsets{3}];
+% Specify the paths to training and  test data
+training_data_dir = [data_path 'test_two\\training\\AS3\\'];
+test_data_dir = [data_path 'test_two\\test\\AS3\\'];
 
-%% Load training data
+%% load training data
 d = dir(training_data_dir);
 isfile = [d(:).isdir] ~= 1;
 files = {d(isfile).name}';
 
 TR_Gestures = struct;
 
-%% Feature extraction for training dataset
+% %% construct raw features
+num_features = 77436;
+TR_FEATURES = zeros(length(files), num_features);
+tr_lables = zeros(length(files), 1);
+%%
 fprintf('Loading training data:\n');
 for i=1:length(files)
     fprintf([files{i}, '...']);
     
-    % load data as a video sequence
     SEQUENCE = readDepthDataset([training_data_dir files{i}]);  % frame scale: [1 552]        
+    [SEQUENCE_XOZ, SEQUENCE_YOZ] = projectVideo(SEQUENCE);      % frame scale: [0 1]
+    
+    %% generate representation for each gesture
+    % load data and extract features
+    
+    % video filtered by Gaussian filter [1 4 6 4 1]
+%     FilteredVideo = GaussianFilterVideo(SEQUENCE);
+%     FilteredVideo_XOZ = GaussianFilterVideo(SEQUENCE_XOZ);
+%     FilteredVideo_YOZ = GaussianFilterVideo(SEQUENCE_YOZ);
+    
+    %% video filtered by LoG
+    FilteredVideo_XOY = LoGFilterVideo(SEQUENCE);
+    FilteredVideo_XOZ = LoGFilterVideo(SEQUENCE_XOZ);
+    FilteredVideo_YOZ = LoGFilterVideo(SEQUENCE_YOZ);
+    
+    %% video filtered by Laplacian
+%     FilteredVideo_XOY = LaplacianFilterVideo(SEQUENCE);
+%     FilteredVideo_XOZ = LaplacianFilterVideo(SEQUENCE_XOZ);
+%     FilteredVideo_YOZ = LaplacianFilterVideo(SEQUENCE_YOZ);
 
-    % gesture representation using 3D-MTM
-    representation = compute3DMTM(SEQUENCE);
+
+    % gesture representation
+    % 3D-MTM
+    %representation = compute3DMTM_v2(SEQUENCE);
+    %representation = compute3DMTM_v3(FilteredVideo, FilteredVideo_XOZ, FilteredVideo_YOZ);
+    representation = compute3DMTM_v4(FilteredVideo_XOY, FilteredVideo_XOZ, FilteredVideo_YOZ);
    
-    % feature extraction using HOG (fast one)
     features = feature_extraction_v3(representation);
     
+%     % MHI
+%     representation = computeMHI(SEQUENCE);
+%     features = HOG(representation);
     %% additional information
     name = files{i};
     id = name(2:3);
@@ -52,6 +79,10 @@ for i=1:length(files)
     TR_Gestures(i).Features = features;
     TR_Gestures(i).Name = name;
     TR_Gestures(i).Id = str2double(id);
+
+%     %% save raw features
+    tr_lables(i, :) = str2double(id);
+    TR_FEATURES(i, :) = features;
     
     fprintf('done.\n');        
 end
