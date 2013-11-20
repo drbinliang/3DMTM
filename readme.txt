@@ -1,15 +1,11 @@
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bin Liang (bin.liang.ty@gmail.com)
-% Charles Sturt University
-% Created:	September 2013
-% Modified:	November 2013
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Three Dimensional Motion Trail Model for Gesture Recognition.
+ 
+This code is developed for the work: Bin Liang, Lihong Zheng "Three Dimensional Motion Trail Model for Gesture Recognition," 
+ICCV 2013 Workshop - Big Data in 3D Computer Vision Workshop.
 
-Gesture recognition Version 1.0 19/11/2013
+In case of publication with this code, please cite the paper above.
 
 Dataset: MSR Action3D dataset
-This code is performed well on MSR Actino3D dataset and a paper has been 
-accepted by ICCV workshop 2013.
 
 HOW to use:
 
