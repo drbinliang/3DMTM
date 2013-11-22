@@ -20,8 +20,12 @@ data_path = 'D:\\Research\\Projects\\Dataset\\MSR Action3D\\dataset\\';
 test_subsets = {'test_one\\', 'test_two\\', 'cross_subject_test\\'};
 action_subsets = {'AS1\\', 'AS2\\', 'AS3\\'};
 
-training_data_dir = [data_path test_subsets{1} 'training\\' action_subsets{1}];
-test_data_dir = [data_path test_subsets{1} 'test\\' action_subsets{1}];
+% training_data_dir = [data_path test_subsets{1} 'training\\' action_subsets{1}];
+% test_data_dir = [data_path test_subsets{1} 'test\\' action_subsets{1}];
+
+performed_dataset_path = [data_path test_subsets{3} action_subsets{1}];
+training_data_dir = [performed_dataset_path 'training\\'];
+test_data_dir = [performed_dataset_path 'test\\'];
 
 %% Load training data
 d = dir(training_data_dir);
